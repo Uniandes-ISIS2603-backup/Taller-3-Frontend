@@ -1,23 +1,25 @@
 (function (ng) {
     var mod = ng.module('bookModule');
 
-    mod.service('bookService', ['$http', 'bookContext', function ($http, context) {
+    mod.service('bookService', ['Restangular', 'bookContext', function (RestAngular, context) {
+            this.api = RestAngular.all(context);
+
             this.fetchRecords = function () {
-                return $http.get(context);
+                return this.api.getList();
             };
 
-            this.fetchRecord = function (id) {
-                return $http.get(context + "/" + id);
+            this.fetchRecord = function (record) {
+                return record.get();
             };
             this.saveRecord = function (currentRecord) {
                 if (currentRecord.id) {
-                    return $http.put(context + "/" + currentRecord.id, currentRecord);
+                    return currentRecord.put();
                 } else {
-                    return $http.post(context, currentRecord);
+                    return this.api.post(currentRecord);
                 }
             };
-            this.deleteRecord = function (id) {
-                return $http.delete(context + "/" + id);
+            this.deleteRecord = function (record) {
+                return record.remove();
             };
         }]);
 })(window.angular);
