@@ -16,19 +16,19 @@
             };
 
             this.editRecord = function (record) {
-                return svc.fetchRecord(record.id).then(function (response) {
-                    $scope.currentRecord = response.data;
+                return svc.fetchRecord(record).then(function (data) {
+                    $scope.currentRecord = data;
                     self.editMode = true;
-                    return response;
+                    return data;
                 });
             };
 
             this.fetchRecords = function () {
-                return svc.fetchRecords().then(function (response) {
-                    $scope.records = response.data;
+                return svc.fetchRecords().then(function (data) {
+                    $scope.records = data;
                     $scope.currentRecord = {};
                     self.editMode = false;
-                    return response;
+                    return data;
                 });
             };
             this.saveRecord = function () {
@@ -37,7 +37,7 @@
                 });
             };
             this.deleteRecord = function (record) {
-                return svc.deleteRecord(record.id).then(function () {
+                return svc.deleteRecord(record).then(function () {
                     self.fetchRecords();
                 });
             };

@@ -1,6 +1,6 @@
 (function (ng) {
-    var mod = ng.module('bookModule', ['ui.bootstrap']);
+    var mod = ng.module('bookModule', ['ui.bootstrap', 'restangular']);
 
-    mod.constant('bookContext', 'webresources/books');
+    mod.constant('bookContext', 'books');
 
 })(window.angular);
